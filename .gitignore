@@ -1,0 +1,6 @@
+*.png
+*.pth
+*.npz
+
+checkpoints/
+results/

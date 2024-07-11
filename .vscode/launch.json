@@ -1,0 +1,48 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    // ################################
+    // ######### CHECK LIST ###########
+    // ################################
+    // # name
+    // # model
+    // # which_model_netG
+    // # dataset_mode
+    // ################################
+
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+
+            "args": ["--dataroot", "../DATASET/ResViT/BraSyn/fold0",
+            "--name", "BraSyn_unified_3to1_finetune_delete",
+            "--gpu_ids", "0" ,
+            "--model", "resvit_uni" ,
+            "--which_model_netG", "res_cnn" ,
+            "--which_direction", "AtoB",
+            "--lambda_A", "100",
+            "--dataset_mode", "uni",
+            "--norm", "batch" ,
+            "--pool_size", "0",
+            "--loadSize", "256" ,
+            "--fineSize", "256" ,
+            "--niter", "50",
+            "--niter_decay", "50",
+            "--checkpoints_dir", "checkpoints/" ,
+            "--no_flip",
+            "--lr", "0.002"
+            ]
+            
+           
+        }
+    ]
+    
+
+}
