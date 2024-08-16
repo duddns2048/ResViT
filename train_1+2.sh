@@ -1,0 +1,46 @@
+python3 train.py \
+    --dataroot ../DATASET/ResViT/BraSyn/fold2 \
+    --name BraSyn_unified_3_to_1_fold2_pretrain \
+    --gpu_ids 0 \
+    --model resvit_uni \
+    --which_model_netG res_cnn \
+    --lambda_A 100 \
+    --dataset_mode uni \
+    --norm batch \
+    --pool_size 0 \
+    --output_nc 1 \
+    --input_nc 1 \
+    --loadSize 256 \
+    --fineSize 256 \
+    --niter 50 \
+    --niter_decay 50 \
+    --save_epoch_freq 1 \
+    --checkpoints_dir checkpoints/ \
+    --display_id 1 \
+    --lr 0.002 \
+    --no_flip \
+    --display_port 10200 \
+    
+python3 train.py \
+    --dataroot ../DATASET/ResViT/BraSyn/fold2 \
+    --name BraSyn_unified_3_to_1_fold2_finetune \
+    --gpu_ids 0 \
+    --model resvit_uni \
+    --which_model_netG resvit \
+    --lambda_A 100 \
+    --dataset_mode uni \
+    --norm batch \
+    --pool_size 0 \
+    --output_nc 1 \
+    --input_nc 1 \
+    --loadSize 256 \
+    --fineSize 256 \
+    --niter 25 \
+    --niter_decay 25 \
+    --checkpoints_dir checkpoints/ \
+    --pre_trained_transformer 1 \
+    --pre_trained_resnet 1 \
+    --pre_trained_path checkpoints/BraSyn_unified_3_to_1_fold2_pretrain/latest_net_G.pth \
+    --lr 0.001 \
+    --no_flip \
+    --display_port 10201

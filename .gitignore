@@ -1,0 +1,8 @@
+*.png
+*.pth
+*.npz
+*.pyc
+*.nii.gz
+
+checkpoints/
+results/
