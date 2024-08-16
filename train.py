@@ -34,7 +34,7 @@ def compute_ssim(fake_im, real_im):
         ssim_per_channel.append(ssim(fake_im[i].unsqueeze(dim=0),real_im[i].unsqueeze(dim=0)))
     
     return torch.mean(torch.tensor(ssim_per_channel))
-
+##
 
 if __name__ == '__main__':
     opt = TrainOptions().parse()
