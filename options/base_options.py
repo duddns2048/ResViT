@@ -35,13 +35,13 @@ class BaseOptions():
                 
         # important
         self.parser.add_argument('--dataroot', required=True, help='path to images (should have subfolders trainA, trainB, valA, valB, etc)')
+        self.parser.add_argument('--name', type=str, required=True, default=None, help='name of the experiment. It decides where to store samples and models')
+        self.parser.add_argument('--which_model_netG', type=str, default='resvit', help='selects model to use for netG')
+        self.parser.add_argument('--dataset_mode', required=True, type=str, default=None, help='chooses how datasets are loaded. [unaligned | aligned | single]')
+        self.parser.add_argument('--model', type=str, required=True, default=None, help='chooses which model to use. resvit_many, resvit_one, or test')
         self.parser.add_argument('--batchSize', type=int, default=1, help='input batch size')
         # self.parser.add_argument('--input_nc', type=int, default=3, help='# of input image channels')
         # self.parser.add_argument('--output_nc', type=int, default=3, help='# of output image channels')
-        self.parser.add_argument('--which_model_netG', type=str, default='resvit', help='selects model to use for netG')
-        self.parser.add_argument('--name', type=str, default='experiment_name', help='name of the experiment. It decides where to store samples and models')
-        self.parser.add_argument('--dataset_mode', type=str, default='unaligned', help='chooses how datasets are loaded. [unaligned | aligned | single]')
-        self.parser.add_argument('--model', type=str, default='resvit_many', help='chooses which model to use. resvit_many, resvit_one, or test')
         
 
         self.initialized = True

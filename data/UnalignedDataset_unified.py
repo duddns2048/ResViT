@@ -8,7 +8,7 @@ import numpy as np
 import random
 import json
 
-class UnalignedDataset_unified(BaseDataset):
+class UnalignedDataset_unified_fewcases(BaseDataset):
     def initialize(self, opt):
         self.opt = opt
         self.root = opt.dataroot
@@ -29,11 +29,13 @@ class UnalignedDataset_unified(BaseDataset):
         self.modality2_paths = sorted(self.modality2_paths)
         self.modality3_paths = sorted(self.modality3_paths)
         self.modality4_paths = sorted(self.modality4_paths)
+        
+        slices = 155 * opt.num_cases
         if self.opt.phase == 'train':
-            self.modality1_paths = self.modality1_paths[:3875]
-            self.modality2_paths = self.modality2_paths[:3875]
-            self.modality3_paths = self.modality3_paths[:3875]
-            self.modality4_paths = self.modality4_paths[:3875]
+            self.modality1_paths = self.modality1_paths[:slices]
+            self.modality2_paths = self.modality2_paths[:slices]
+            self.modality3_paths = self.modality3_paths[:slices]
+            self.modality4_paths = self.modality4_paths[:slices]
         
         self.modality1_size = len(self.modality1_paths)
         self.modality2_size = len(self.modality2_paths)
@@ -43,25 +45,11 @@ class UnalignedDataset_unified(BaseDataset):
 
     def __getitem__(self, index):
 
-        # self.avail_fn = [1,1,1,1] # t1c t1n t2w t2f
-        # random_number = random.randint(0, 3)
-        # self.avail_fn[random_number] = 0
-
-        # if self.opt.phase =='test':
-        #     if self.opt.test_modality == 't1n':
-        #         self.avail_fn = [0,1,1,1]
-        #     elif self.opt.test_modality == 't1c':
-        #         self.avail_fn = [1,0,1,1]
-        #     elif self.opt.test_modality == 't2w':
-        #         self.avail_fn = [1,1,0,1]
-        #     elif self.opt.test_modality == 't2f':
-        #         self.avail_fn = [1,1,1,0]
-
         modality1_path = self.modality1_paths[index % self.modality1_size]
         modality2_path = self.modality2_paths[index % self.modality2_size]
         modality3_path = self.modality3_paths[index % self.modality3_size]
         modality4_path = self.modality4_paths[index % self.modality4_size]
-        #print('(modality1, B) = (%d, %d)' % (index, index_B))
+
         if modality1_path.endswith(".npy"):
             modality1_img = Image.fromarray(np.expand_dims(np.load(modality1_path).astype(np.float32),axis=0))
             modality2_img = Image.fromarray(np.expand_dims(np.load(modality2_path).astype(np.float32),axis=0))
@@ -79,12 +67,7 @@ class UnalignedDataset_unified(BaseDataset):
             # modality4_img = Image.fromarray(modality4_img).convert('RGB')
             
             
-        else:
-            # modality1_img = Image.open(modality1_path)
-            # modality2_img = Image.open(modality2_path)
-            # modality3_img = Image.open(modality3_path)
-            # modality4_img = Image.open(modality4_path)
-            
+        else:            
             modality1_img = Image.open(modality1_path).convert('RGB')
             modality2_img = Image.open(modality2_path).convert('RGB')
             modality3_img = Image.open(modality3_path).convert('RGB')
@@ -145,7 +128,7 @@ class UnalignedDataset_unified(BaseDataset):
         return 'UnalignedDataset_unified'
     
     
-class UnalignedDataset_unified2(BaseDataset):
+class UnalignedDataset_unified_randomsample(BaseDataset):
     def initialize(self, opt):
         self.opt = opt
         self.root = opt.dataroot

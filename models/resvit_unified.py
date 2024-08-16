@@ -96,8 +96,6 @@ class ResViT_model(BaseModel):
             self.input_A = self.input_A.cuda(self.gpu_ids[0], non_blocking=True)
             self.input_B = self.input_B.cuda(self.gpu_ids[0], non_blocking=True)
             
-            
-            
         # path
         self.image_paths = input['input_images']
 

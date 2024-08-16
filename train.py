@@ -11,7 +11,23 @@ from util.util import save_image
 from tqdm import tqdm
 from torchmetrics.image import PeakSignalNoiseRatio, StructuralSimilarityIndexMeasure
 import torch
+import random
 
+def set_seed(seed):
+    # Python의 랜덤 시드 고정
+    random.seed(seed)
+    # Numpy의 랜덤 시드 고정
+    np.random.seed(seed)
+    # PyTorch의 시드 고정
+    torch.manual_seed(seed)
+    # CUDA 연산에서의 시드 고정 (GPU 사용 시)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+        torch.cuda.manual_seed_all(seed)  # 여러 개의 GPU를 사용하는 경우 모든 GPU의 시드를 고정
+    # CuDNN에서의 재현성 보장 설정 (가능한 경우)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    
 def print_log(logger,message):
     print(f'Project Name: {message}', flush=True)
     if logger:
@@ -37,6 +53,7 @@ def compute_ssim(fake_im, real_im):
 ##
 
 if __name__ == '__main__':
+    set_seed(2048)
     opt = TrainOptions().parse()
     #Training data
     data_loader = CreateDataLoader(opt)

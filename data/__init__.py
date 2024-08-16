@@ -33,12 +33,12 @@ def CreateDataset(opt):
         from data.UnalignedDataset_3_to_1 import UnalignedDataset_3_to_1_real
         dataset = UnalignedDataset_3_to_1_real()
     elif opt.dataset_mode == 'uni':
-        if opt.phase =='train':
-            from data.UnalignedDataset_unified import UnalignedDataset_unified
-            dataset = UnalignedDataset_unified()
-        elif (opt.phase == 'val') or (opt.phase == 'test'):
-            from data.UnalignedDataset_unified import UnalignedDataset_unified
-            dataset = UnalignedDataset_unified()
+        if opt.num_cases:
+            from data.UnalignedDataset_unified import UnalignedDataset_unified_fewcases
+            dataset = UnalignedDataset_unified_fewcases()
+        else:
+            from data.UnalignedDataset_unified import UnalignedDataset_unified_randomsample
+            dataset = UnalignedDataset_unified_randomsample()
     else:
         raise ValueError("Dataset [%s] not recognized." % opt.dataset_mode)  
         print("dataset [%s] was created" % (dataset.name()))

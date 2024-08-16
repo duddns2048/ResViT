@@ -11,7 +11,7 @@ class TrainOptions(BaseOptions):
         self.parser.add_argument('--lambda_adv', type=float, default=1.0, help='weight for adversarial loss')
         # self.parser.add_argument('--trans_lr_coef', type=float, default=1, help='initial learning rate for adam')
         
-        # hyperpara
+        # hyperparam
         self.parser.add_argument('--niter', type=int, default=50, help='# of iter at starting learning rate')
         self.parser.add_argument('--niter_decay', type=int, default=50, help='# of iter to linearly decay learning rate to zero')
         self.parser.add_argument('--lr', type=float, default=0.0002, help='initial learning rate for adam')
@@ -37,6 +37,7 @@ class TrainOptions(BaseOptions):
         self.parser.add_argument('--phase', type=str, default='train', help='train, val, test, etc')
         self.parser.add_argument('--fold', type=int, default=0, help='fold num')
         self.parser.add_argument('--G_only_L1', type=int, default=0, help='if specified, G_loss = L1 | else G_loss = GAN_loss + L1_loss')
+        self.parser.add_argument('--num_cases', type=int, default=25, help='if you wnat to learn just few cases')
 
         # # 1 to 1
         self.parser.add_argument('--one_to_one_source', type=str, default=None, help='source modality when 1_to_1 mode')
